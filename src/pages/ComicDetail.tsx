@@ -1,14 +1,21 @@
 import { Link, useParams } from 'react-router-dom'
 import ChaptersList from '../components/comics/ChaptersList'
 import ComicCoverCard from '../components/comics/ComicCoverCard'
+import CommentsList from '../components/comics/CommentsList'
 import FavoriteButton from '../components/favorites/FavoriteButton'
 import useComicDetail from '../hooks/useComicDetail'
+import useComicComments from '../hooks/useComicComments'
 
 // Display comic details and list of chapters
 export default function ComicDetail() {
   const { id } = useParams()
   const { comic, chapters, error, isFavorite, favoriteLoading, toggleFavorite } =
     useComicDetail(id)
+  const {
+    comments,
+    loading: commentsLoading,
+    error: commentsError,
+  } = useComicComments(id)
 
   return (
     <div className="mx-auto max-w-5xl px-6 py-8">
@@ -45,6 +52,12 @@ export default function ComicDetail() {
                 {comic.description}
               </p>
             ) : null}
+
+            <CommentsList
+              comments={comments}
+              loading={commentsLoading}
+              error={commentsError}
+            />
 
             <ChaptersList chapters={chapters} />
           </div>
