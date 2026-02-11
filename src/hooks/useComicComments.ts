@@ -20,7 +20,10 @@ type UseComicCommentsResult = {
   comments: Comment[]
   loading: boolean
   error: string | null
+  submitLoading: boolean
+  submitError: string | null
   refresh: () => Promise<void>
+  addComment: (content: string) => Promise<boolean>
 }
 
 export default function useComicComments(
@@ -29,6 +32,8 @@ export default function useComicComments(
   const [comments, setComments] = useState<Comment[]>([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [submitLoading, setSubmitLoading] = useState(false)
+  const [submitError, setSubmitError] = useState<string | null>(null)
   const [currentUserId, setCurrentUserId] = useState<string | null>(null)
   const [currentUserEmailPrefix, setCurrentUserEmailPrefix] = useState<
     string | null
@@ -126,9 +131,62 @@ export default function useComicComments(
     refresh()
   }, [refresh])
 
+  const addComment = useCallback(
+    async (content: string) => {
+      const trimmed = content.trim()
+
+      if (!trimmed) {
+        setSubmitError('Comment cannot be empty.')
+        return false
+      }
+
+      if (!comicId || !currentUserId) {
+        setSubmitError('Sign in required.')
+        return false
+      }
+
+      setSubmitLoading(true)
+      setSubmitError(null)
+
+      const { error: insertError } = await supabase.from('comments').insert({
+        comic_id: comicId,
+        user_id: currentUserId,
+        content: trimmed,
+        parent_id: null,
+      })
+
+      if (insertError) {
+        setSubmitError(insertError.message)
+        setSubmitLoading(false)
+        return false
+      }
+
+      await refresh()
+      setSubmitLoading(false)
+      return true
+    },
+    [comicId, currentUserId, refresh],
+  )
+
   const result = useMemo(
-    () => ({ comments, loading, error, refresh }),
-    [comments, error, loading, refresh],
+    () => ({
+      comments,
+      loading,
+      error,
+      submitLoading,
+      submitError,
+      refresh,
+      addComment,
+    }),
+    [
+      addComment,
+      comments,
+      error,
+      loading,
+      refresh,
+      submitError,
+      submitLoading,
+    ],
   )
 
   return result

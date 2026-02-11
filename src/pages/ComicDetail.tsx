@@ -1,5 +1,6 @@
 import { Link, useParams } from 'react-router-dom'
 import ChaptersList from '../components/comics/ChaptersList'
+import CommentForm from '../components/comics/CommentForm'
 import ComicCoverCard from '../components/comics/ComicCoverCard'
 import CommentsList from '../components/comics/CommentsList'
 import FavoriteButton from '../components/favorites/FavoriteButton'
@@ -15,6 +16,9 @@ export default function ComicDetail() {
     comments,
     loading: commentsLoading,
     error: commentsError,
+    submitLoading,
+    submitError,
+    addComment,
   } = useComicComments(id)
 
   return (
@@ -52,14 +56,20 @@ export default function ComicDetail() {
                 {comic.description}
               </p>
             ) : null}
+            
+            <ChaptersList chapters={chapters} />
 
+            <CommentForm
+              loading={submitLoading}
+              error={submitError}
+              onSubmit={addComment}
+            />
             <CommentsList
               comments={comments}
               loading={commentsLoading}
               error={commentsError}
             />
 
-            <ChaptersList chapters={chapters} />
           </div>
         </div>
       ) : null}
