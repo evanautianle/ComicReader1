@@ -66,7 +66,7 @@ flowchart LR
 4. UI refreshes by reloading hook data.
 
 ## Database Schema
-![Schema Visualizer](public/schema.png)
+![Schema Visualizer](/COMIC-READER/schema.png)
 
 **Core tables**
 - `comics`, `chapters`, `pages`
@@ -76,21 +76,21 @@ flowchart LR
 ## Screenshots
 ### Mobile Views
 
-<img src="public/screenshots/phone-home.png" alt="Mobile - Home" width="240" />
-<img src="public/screenshots/phone-comic-detail.png" alt="Mobile - Comic Detail" width="240" />
-<img src="public/screenshots/phone-reader.png" alt="Mobile - Reader" width="240" />
-<img src="public/screenshots/phone-favourites.png" alt="Mobile - Favorites" width="240" />
-<img src="public/screenshots/phone-activity.png" alt="Mobile - Activity" width="240" />
-<img src="public/screenshots/phone-profile.png" alt="Mobile - Profile" width="240" />
+<img src="/COMIC-READER/screenshots/phone-home.png" alt="Mobile - Home" width="240" />
+<img src="/COMIC-READER/screenshots/phone-comic-detail.png" alt="Mobile - Comic Detail" width="240" />
+<img src="/COMIC-READER/screenshots/phone-reader.png" alt="Mobile - Reader" width="240" />
+<img src="/COMIC-READER/screenshots/phone-favourites.png" alt="Mobile - Favorites" width="240" />
+<img src="/COMIC-READER/screenshots/phone-activity.png" alt="Mobile - Activity" width="240" />
+<img src="/COMIC-READER/screenshots/phone-profile.png" alt="Mobile - Profile" width="240" />
 
 ### Desktop Views
 
-<img src="public/screenshots/desk-home.png" alt="Desktop - Home" width="520" />
-<img src="public/screenshots/desk-comic-detail.png" alt="Desktop - Comic Detail" width="520" />
-<img src="public/screenshots/desk-reader.png" alt="Desktop - Reader" width="520" />
-<img src="public/screenshots/desk-favourites.png" alt="Desktop - Favorites" width="520" />
-<img src="public/screenshots/desk-activity.png" alt="Desktop - Activity" width="520" />
-<img src="public/screenshots/desk-profile.png" alt="Desktop - Profile" width="520" />
+<img src="/COMIC-READER/screenshots/desk-home.png" alt="Desktop - Home" width="520" />
+<img src="/COMIC-READER/screenshots/desk-comic-detail.png" alt="Desktop - Comic Detail" width="520" />
+<img src="/COMIC-READER/screenshots/desk-reader.png" alt="Desktop - Reader" width="520" />
+<img src="/COMIC-READER/screenshots/desk-favourites.png" alt="Desktop - Favorites" width="520" />
+<img src="/COMIC-READER/screenshots/desk-activity.png" alt="Desktop - Activity" width="520" />
+<img src="/COMIC-READER/screenshots/desk-profile.png" alt="Desktop - Profile" width="520" />
 
 ## Running Locally
 **Prerequisites**
