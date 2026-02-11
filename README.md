@@ -44,10 +44,10 @@ A comic library reader for public domain Golden Age comics. The app lets people 
 ## Architecture Diagram
 ```mermaid
 flowchart LR
-	App[React App: UI + Hooks] --> Supabase[(Supabase)]
-	Supabase --> Auth[Auth]
-	Supabase --> DB[(Postgres DB)]
-	Supabase --> Storage[(Storage)]
+  App[React App] --> Supabase[(Supabase)]
+  Supabase --> Auth[Auth]
+  Supabase --> DB[(Postgres DB)]
+  Supabase --> Storage[(Storage)]
 ```
 
 ## Data Flow
