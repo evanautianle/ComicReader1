@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
 import type { FormEvent } from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Link, Route, Routes } from 'react-router-dom'
 import type { Session } from '@supabase/supabase-js'
 import ComicDetail from './pages/ComicDetail'
 import Home from './pages/Home'
+import Profile from './pages/Profile'
 import Reader from './pages/Reader'
 import { supabase } from './lib/supabaseClient'
 
@@ -136,6 +137,12 @@ function App() {
         </div>
         {session ? (
           <div className="flex items-center gap-3">
+            <Link
+              to="/profile"
+              className="text-xs text-neutral-400 hover:text-neutral-200"
+            >
+              Profile
+            </Link>
             <span className="text-xs text-neutral-400">
               {profileName || session.user.email || 'Signed in'}
             </span>
@@ -198,6 +205,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/comic/:id" element={gatedContent(<ComicDetail />)} />
+          <Route path="/profile" element={gatedContent(<Profile />)} />
           <Route
             path="/reader/:chapterId"
             element={gatedContent(<Reader />)}
