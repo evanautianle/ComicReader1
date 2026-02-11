@@ -9,6 +9,7 @@ import { supabase } from './lib/supabaseClient'
 
 function App() {
   const [session, setSession] = useState<Session | null>(null)
+  const [profileName, setProfileName] = useState<string | null>(null)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
@@ -36,6 +37,30 @@ function App() {
       authListener.subscription.unsubscribe()
     }
   }, [])
+
+  useEffect(() => {
+    const loadProfile = async () => {
+      if (!session?.user) {
+        setProfileName(null)
+        return
+      }
+
+      const { data, error } = await supabase
+        .from('profiles')
+        .select('display_name')
+        .eq('id', session.user.id)
+        .maybeSingle()
+
+      if (error) {
+        setAuthError(error.message)
+        return
+      }
+
+      setProfileName(data?.display_name ?? null)
+    }
+
+    loadProfile()
+  }, [session])
 
   const handleSignIn = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -88,7 +113,7 @@ function App() {
         {session ? (
           <div className="flex items-center gap-3">
             <span className="text-xs text-neutral-400">
-              {session.user.email ?? 'Signed in'}
+              {profileName || session.user.email || 'Signed in'}
             </span>
             <button
               type="button"
