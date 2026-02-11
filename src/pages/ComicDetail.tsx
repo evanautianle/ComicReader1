@@ -1,5 +1,4 @@
 import type { Session } from '@supabase/supabase-js'
-import { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import ChaptersList from '../components/comics/ChaptersList'
 import CommentForm from '../components/comics/CommentForm'
@@ -9,6 +8,7 @@ import RatingPicker from '../components/comics/RatingPicker'
 import FavoriteButton from '../components/favorites/FavoriteButton'
 import useComicDetail from '../hooks/useComicDetail'
 import useComicComments from '../hooks/useComicComments'
+import useComicRatings from '../hooks/useComicRatings'
 
 type ComicDetailProps = {
   session: Session | null
@@ -27,8 +27,16 @@ export default function ComicDetail({ session }: ComicDetailProps) {
     submitError,
     addComment,
   } = useComicComments(id)
+  const {
+    userRating,
+    averageRating,
+    ratingCount,
+    loading: ratingLoading,
+    submitLoading: ratingSubmitting,
+    error: ratingError,
+    setRating,
+  } = useComicRatings(id)
   const isSignedIn = Boolean(session?.user)
-  const [ratingValue, setRatingValue] = useState<number | null>(null)
 
   return (
     <div className="mx-auto max-w-5xl px-6 py-8">
@@ -45,8 +53,13 @@ export default function ComicDetail({ session }: ComicDetailProps) {
           <div className="self-start">
             <ComicCoverCard title={comic.title} coverUrl={comic.cover_url} />
             <RatingPicker
-              value={ratingValue}
-              onChange={setRatingValue}
+              value={userRating}
+              average={averageRating}
+              count={ratingCount}
+              loading={ratingLoading}
+              submitting={ratingSubmitting}
+              error={ratingError}
+              onChange={setRating}
               disabled={!isSignedIn}
             />
           </div>
