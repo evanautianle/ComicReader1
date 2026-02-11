@@ -1,4 +1,4 @@
-import ComicsGrid from '../components/ComicsGrid'
+import ComicsGrid from '../components/comics/ComicsGrid'
 import useComics from '../hooks/useComics'
 
 export default function Home() {

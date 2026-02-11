@@ -1,7 +1,7 @@
 import { Link, useParams } from 'react-router-dom'
-import ChaptersList from '../components/ChaptersList'
-import ComicCoverCard from '../components/ComicCoverCard'
-import FavoriteButton from '../components/FavoriteButton'
+import ChaptersList from '../components/comics/ChaptersList'
+import ComicCoverCard from '../components/comics/ComicCoverCard'
+import FavoriteButton from '../components/favorites/FavoriteButton'
 import useComicDetail from '../hooks/useComicDetail'
 
 // Display comic details and list of chapters

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import ProfileForm from '../components/ProfileForm'
+import ProfileForm from '../components/profile/ProfileForm'
 import { supabase } from '../lib/supabaseClient'
 
 type ProfileRow = {

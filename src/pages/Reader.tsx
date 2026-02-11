@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import ReaderControls from '../components/ReaderControls'
-import ReaderToolbar from '../components/ReaderToolbar'
-import ReaderViewport from '../components/ReaderViewport'
+import ReaderControls from '../components/reader/ReaderControls'
+import ReaderToolbar from '../components/reader/ReaderToolbar'
+import ReaderViewport from '../components/reader/ReaderViewport'
 import { supabase } from '../lib/supabaseClient'
 
 type Page = {

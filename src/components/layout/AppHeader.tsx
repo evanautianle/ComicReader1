@@ -1,7 +1,7 @@
 import type { ChangeEvent, FormEvent } from 'react'
 import type { Session } from '@supabase/supabase-js'
 import { Link } from 'react-router-dom'
-import AuthForm from './AuthForm'
+import AuthForm from '../auth/AuthForm'
 
 type AppHeaderProps = {
   session: Session | null

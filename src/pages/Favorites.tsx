@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import FavoritesGrid from '../components/FavoritesGrid'
+import FavoritesGrid from '../components/favorites/FavoritesGrid'
 import useFavorites from '../hooks/useFavorites'
 
 export default function Favorites() {
