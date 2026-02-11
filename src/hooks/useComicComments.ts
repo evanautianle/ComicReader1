@@ -41,14 +41,15 @@ export default function useComicComments(
 
   useEffect(() => {
     const loadUser = async () => {
-      const { data, error: userError } = await supabase.auth.getUser()
-      if (userError) {
-        setError(userError.message)
+      const { data: sessionData, error: sessionError } =
+        await supabase.auth.getSession()
+      if (sessionError) {
+        setError(sessionError.message)
         return
       }
 
-      const emailPrefix = data.user?.email?.split('@')[0] ?? null
-      setCurrentUserId(data.user?.id ?? null)
+      const emailPrefix = sessionData.session?.user?.email?.split('@')[0] ?? null
+      setCurrentUserId(sessionData.session?.user?.id ?? null)
       setCurrentUserEmailPrefix(emailPrefix)
     }
 

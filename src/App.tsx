@@ -49,11 +49,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route
             path="/comic/:id"
-            element={
-              <RequireAuth session={session}>
-                <ComicDetail />
-              </RequireAuth>
-            }
+            element={<ComicDetail session={session} />}
           />
           <Route
             path="/favorites"
@@ -73,11 +69,7 @@ function App() {
           />
           <Route
             path="/reader/:chapterId"
-            element={
-              <RequireAuth session={session}>
-                <Reader />
-              </RequireAuth>
-            }
+            element={<Reader />}
           />
         </Routes>
       </main>

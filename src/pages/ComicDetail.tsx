@@ -1,3 +1,4 @@
+import type { Session } from '@supabase/supabase-js'
 import { Link, useParams } from 'react-router-dom'
 import ChaptersList from '../components/comics/ChaptersList'
 import CommentForm from '../components/comics/CommentForm'
@@ -7,8 +8,12 @@ import FavoriteButton from '../components/favorites/FavoriteButton'
 import useComicDetail from '../hooks/useComicDetail'
 import useComicComments from '../hooks/useComicComments'
 
+type ComicDetailProps = {
+  session: Session | null
+}
+
 // Display comic details and list of chapters
-export default function ComicDetail() {
+export default function ComicDetail({ session }: ComicDetailProps) {
   const { id } = useParams()
   const { comic, chapters, error, isFavorite, favoriteLoading, toggleFavorite } =
     useComicDetail(id)
@@ -20,6 +25,7 @@ export default function ComicDetail() {
     submitError,
     addComment,
   } = useComicComments(id)
+  const isSignedIn = Boolean(session?.user)
 
   return (
     <div className="mx-auto max-w-5xl px-6 py-8">
@@ -33,7 +39,9 @@ export default function ComicDetail() {
 
       {comic ? (
         <div className="mt-4 grid gap-6 md:grid-cols-[240px,1fr]">
-          <ComicCoverCard title={comic.title} coverUrl={comic.cover_url} />
+          <div className="self-start">
+            <ComicCoverCard title={comic.title} coverUrl={comic.cover_url} />
+          </div>
 
           <div>
             <div className="flex flex-wrap items-start justify-between gap-3">
@@ -43,6 +51,7 @@ export default function ComicDetail() {
               <FavoriteButton
                 isFavorite={isFavorite}
                 loading={favoriteLoading}
+                disabled={!isSignedIn}
                 onToggle={toggleFavorite}
               />
             </div>
@@ -59,17 +68,22 @@ export default function ComicDetail() {
             
             <ChaptersList chapters={chapters} />
 
-            <CommentForm
-              loading={submitLoading}
-              error={submitError}
-              onSubmit={addComment}
-            />
+            {!isSignedIn ? (
+              <div className="mt-8 rounded-lg border border-neutral-800 bg-neutral-900 p-5 text-xs text-neutral-400">
+                Sign in to add comments, rate, or favorite this comic.
+              </div>
+            ) : (
+              <CommentForm
+                loading={submitLoading}
+                error={submitError}
+                onSubmit={addComment}
+              />
+            )}
             <CommentsList
               comments={comments}
               loading={commentsLoading}
               error={commentsError}
             />
-
           </div>
         </div>
       ) : null}

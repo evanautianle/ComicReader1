@@ -39,15 +39,15 @@ export default function useComicDetail(
 
     const fetchData = async () => {
       setError(null)
-      const { data: userData, error: userError } =
-        await supabase.auth.getUser()
+      const { data: sessionData, error: sessionError } =
+        await supabase.auth.getSession()
 
-      if (userError) {
-        setError(userError.message)
+      if (sessionError) {
+        setError(sessionError.message)
         return
       }
 
-      setUserId(userData.user?.id ?? null)
+      setUserId(sessionData.session?.user?.id ?? null)
 
       const { data: comicData, error: comicError } = await supabase
         .from('comics')
