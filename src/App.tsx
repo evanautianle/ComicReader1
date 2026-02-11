@@ -56,7 +56,22 @@ function App() {
         return
       }
 
-      setProfileName(data?.display_name ?? null)
+      if (!data) {
+        const fallbackName = session.user.email?.split('@')[0] ?? 'Reader'
+        const { error: upsertError } = await supabase
+          .from('profiles')
+          .upsert({ id: session.user.id, display_name: fallbackName })
+
+        if (upsertError) {
+          setAuthError(upsertError.message)
+          return
+        }
+
+        setProfileName(fallbackName)
+        return
+      }
+
+      setProfileName(data.display_name ?? null)
     }
 
     loadProfile()
