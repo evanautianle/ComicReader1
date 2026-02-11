@@ -47,6 +47,12 @@ export default function AppHeader({
             Profile
           </Link>
           <Link
+            to="/activity"
+            className="text-xs text-neutral-400 hover:text-neutral-200"
+          >
+            Activity
+          </Link>
+          <Link
             to="/favorites"
             className="text-xs text-neutral-400 hover:text-neutral-200"
           >

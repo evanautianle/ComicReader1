@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
 import AppHeader from './components/layout/AppHeader'
 import RequireAuth from './components/auth/RequireAuth'
+import Activity from './pages/Activity'
 import ComicDetail from './pages/ComicDetail'
 import Favorites from './pages/Favorites'
 import Home from './pages/Home'
@@ -56,6 +57,14 @@ function App() {
             element={
               <RequireAuth session={session}>
                 <Favorites />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/activity"
+            element={
+              <RequireAuth session={session}>
+                <Activity />
               </RequireAuth>
             }
           />
